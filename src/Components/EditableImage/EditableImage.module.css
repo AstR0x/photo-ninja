@@ -1,0 +1,9 @@
+.imageContainer {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.image {
+    width: 30%;
+    height: 30%;
+}

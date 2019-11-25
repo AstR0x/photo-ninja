@@ -1,0 +1,6 @@
+.app {
+    background-color: #e1e1df;
+    background: url("./images/background.jpg") 0 -250px no-repeat;
+    background-size: cover;
+    min-height: 970px;
+}

@@ -1,0 +1,9 @@
+.form {
+    margin: 50px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.input {
+    margin-right: 10px;
+}

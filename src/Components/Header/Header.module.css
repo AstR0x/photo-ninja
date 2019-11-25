@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'Han-Zi';
+    src: url('../../fonts/Han-Zi.otf');
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    height: 140px;
+    padding: 45px 120px 0 120px;
+    background-color: #f8f8f8;
+    box-sizing: border-box;
+}
+
+.heading {
+    margin-top: 0;
+    font-family: Han-Zi;
+    text-align: center;
+    text-transform: uppercase;
+}
