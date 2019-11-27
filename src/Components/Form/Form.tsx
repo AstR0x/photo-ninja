@@ -19,7 +19,7 @@ class Form extends Component<{ onSubmit: (event: any, url: string) => void }, {}
     render() {
         const {inputValue} = this.state;
 
-        return (
+         return (
             <div className={styles.form}>
                 <Input
                     className={styles.input}

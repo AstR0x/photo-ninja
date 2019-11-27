@@ -8,12 +8,16 @@
     "@types/node": "12.12.12",
     "@types/react": "16.9.12",
     "@types/react-dom": "16.9.4",
+    "@types/react-redux": "^7.1.5",
     "clsx": "^1.0.4",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-multi-carousel": "^2.4.2",
+    "react-redux": "^7.1.3",
     "react-scripts": "3.2.0",
-    "typescript": "3.7.2"
+    "redux-devtools-extension": "^2.13.8",
+    "typescript": "3.7.2",
+    "vintagejs": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

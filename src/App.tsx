@@ -1,9 +1,9 @@
 import React from 'react';
 
 import styles from './App.module.css';
-import Header from './Components/Header/Header';
-import PhotoCarousel from './Components/PhotoCarousel/PhotoCarousel';
-import EditableImage from './Components/EditableImage/EditableImage';
+import Header from './components/Header/Header';
+import PhotoCarousel from './components/PhotoCarousel/PhotoCarousel';
+import EditableImageContainer from './containers/EditableImageContainer';
 
 
 const App: React.FC = () => {
@@ -11,7 +11,7 @@ const App: React.FC = () => {
         <div className={styles.app}>
             <Header />
             <PhotoCarousel />
-            <EditableImage />
+            <EditableImageContainer />
         </div>
     );
 }

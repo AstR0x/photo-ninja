@@ -3,33 +3,41 @@ import React, {Component, Fragment} from 'react';
 import Form from "../Form/Form";
 
 import styles from './EditableImage.module.css';
+import vintagejs from "vintagejs/dist/vintage";
 
-class EditableImage extends Component {
+class EditableImage extends Component<{ filter: string }, {}> {
     state = {
-        url: '',
+        originalURL: '',
+        modifiedURL: '',
     };
 
-    handleSubmit = (event: any, url: string) => {
+    componentWillReceiveProps({filter}) {
+        vintagejs(this.state.originalURL, {[filter]: 0.5})
+            .then(res => res.getDataURL())
+            .then(modifiedURL => this.setState({modifiedURL}));
+    };
+
+    handleSubmit = (event: any, URL: string) => {
         event.preventDefault();
-        this.setState({url});
+        this.setState({originalURL: URL})
     };
 
     render() {
-        const {url} = this.state;
+        const {originalURL, modifiedURL} = this.state;
 
-        return url ? (
+        return modifiedURL || originalURL ? (
             <Fragment>
                 <div className={styles.imageContainer}>
                     <img
-                        alt="Редактируемое изображение"
-                        src={url}
                         className={styles.image}
+                        alt="Редактируемое изображение"
+                        src={modifiedURL || originalURL}
                     />
                 </div>
-                <Form onSubmit={this.handleSubmit} />
+                <Form onSubmit={this.handleSubmit}/>
             </Fragment>
-        ) : <Form onSubmit={this.handleSubmit} />
-    }
+        ) : <Form onSubmit={this.handleSubmit}/>
+    };
 }
 
 export default EditableImage;

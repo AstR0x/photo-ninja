@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import Carousel from "react-multi-carousel";
 
 import "react-multi-carousel/lib/styles.css";
 
-import PhotoCard from "../PhotoCard/PhotoCard";
+import PhotoCardContainer from "../../containers/PhotoCardContainer";
 
 import styles from './PhotoCarousel.module.css';
+import vintagejs from "vintagejs/dist/vintage";
 
 const responsive = {
     desktop: {
@@ -26,29 +27,47 @@ const responsive = {
     },
 };
 
-const PhotoCarousel: React.FC = () => {
-    return (
-        <Carousel
-            swipeable={false}
-            draggable={false}
-            showDots={true}
-            responsive={responsive}
-            infinite={true}
-            autoPlaySpeed={1000}
-            keyBoardControl={true}
-            transitionDuration={500}
-            containerClass={styles.carouselContainer}
-            removeArrowOnDeviceType={["tablet", "mobile"]}
-        >
-            <PhotoCard/>
-            <PhotoCard mode="contrast"/>
-            <PhotoCard mode="brightness"/>
-            <PhotoCard mode="saturate"/>
-            <PhotoCard mode="grayscale"/>
-            <PhotoCard mode="sepia"/>
-            <PhotoCard mode="invert"/>
-        </Carousel>
-    );
+class PhotoCarousel extends Component {
+
+    state = {
+        filters: ['original', 'contrast', 'brightness', 'saturation', 'gray', 'sepia', 'vignette', 'lighten'],
+        // filtersURLs: {},
+    };
+
+    //
+    // async componentDidMount() {
+    //
+    //        const url = await vintagejs('./../../images/card-image.png', {contrast: 0.5});
+    //
+    //
+    //     console.log(url);
+    //
+    //
+    //
+    //     console.log(this.state);
+    // }
+
+    render() {
+        const {filters} = this.state;
+
+        return (
+            <Carousel
+                swipeable={false}
+                draggable={false}
+                showDots={true}
+                responsive={responsive}
+                infinite={true}
+                autoPlaySpeed={1000}
+                keyBoardControl={true}
+                transitionDuration={500}
+                containerClass={styles.carouselContainer}
+                removeArrowOnDeviceType={["tablet", "mobile"]}
+            >
+                {filters.map(filter => <PhotoCardContainer mode={filter}/>)}
+            </Carousel>
+        );
+    }
+
 }
 
 export default PhotoCarousel;
