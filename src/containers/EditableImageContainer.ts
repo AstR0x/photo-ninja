@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 
-import EditableImage from "../components/EditableImage/EditableImage";
+import EditableImage from '../components/EditableImage/EditableImage';
 
 function mapStateToProps(state: any) {
     return {
