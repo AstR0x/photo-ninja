@@ -1,17 +1,19 @@
 import React from 'react';
 
-import clsx from "clsx";
-
 import styles from './PhotoCard.module.css';
 
-const PhotoCard = ({mode, onSetFilter}: {mode: string, onSetFilter?: (mode: string) => void}) => {
-    const classes = mode ? clsx(styles.card, styles[mode]) : styles.card;
-
-    return (
-        <div onClick={() => onSetFilter(mode)} className={styles.imageContainer}>
-            <img className={classes}/>
-        </div>
-    );
-}
+const PhotoCard = ({ filter, URL, onSetFilter }: {
+  filter: string,
+  URL: string,
+  onSetFilter?: (filter: string) => void,
+}) => (
+  <div
+    role="button"
+    className={styles.imageContainer}
+    onClick={() => onSetFilter(filter)}
+  >
+    <img alt="фото фильтр" src={URL} className={styles.card} />
+  </div>
+);
 
 export default PhotoCard;

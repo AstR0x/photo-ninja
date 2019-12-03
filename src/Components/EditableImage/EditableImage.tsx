@@ -1,43 +1,47 @@
-import React, {Component, Fragment} from 'react';
+import React, { Component } from 'react';
 
-import Form from "../Form/Form";
+import vintagejs from 'vintagejs';
+
+import Form from '../Form/Form';
 
 import styles from './EditableImage.module.css';
-import vintagejs from "vintagejs/dist/vintage";
+
 
 class EditableImage extends Component<{ filter: string }, {}> {
-    state = {
-        originalURL: '',
-        modifiedURL: '',
-    };
+  state = {
+    originalURL: '',
+    modifiedURL: '',
+  };
 
-    componentWillReceiveProps({filter}) {
-        vintagejs(this.state.originalURL, {[filter]: 0.5})
-            .then(res => res.getDataURL())
-            .then(modifiedURL => this.setState({modifiedURL}));
-    };
+  componentWillReceiveProps({ filter }) {
+    const { originalURL } = this.state;
 
-    handleSubmit = (event: any, URL: string) => {
-        event.preventDefault();
-        this.setState({originalURL: URL})
-    };
+    vintagejs(originalURL, { [filter]: 0.2 })
+      .then(res => res.getDataURL())
+      .then(modifiedURL => this.setState({ modifiedURL }));
+  }
 
-    render() {
-        const {originalURL, modifiedURL} = this.state;
+  handleSubmit = (event: any, URL: string) => {
+    event.preventDefault();
+    this.setState({ originalURL: URL });
+  };
 
-        return modifiedURL || originalURL ? (
-            <Fragment>
-                <div className={styles.imageContainer}>
-                    <img
-                        className={styles.image}
-                        alt="Редактируемое изображение"
-                        src={modifiedURL || originalURL}
-                    />
-                </div>
-                <Form onSubmit={this.handleSubmit}/>
-            </Fragment>
-        ) : <Form onSubmit={this.handleSubmit}/>
-    };
+  render() {
+    const { originalURL, modifiedURL } = this.state;
+
+    return modifiedURL || originalURL ? (
+      <>
+        <div className={styles.imageContainer}>
+          <img
+            className={styles.image}
+            alt="Редактируемое изображение"
+            src={modifiedURL || originalURL}
+          />
+        </div>
+        <Form onSubmit={this.handleSubmit} />
+      </>
+    ) : <Form onSubmit={this.handleSubmit} />;
+  }
 }
 
 export default EditableImage;

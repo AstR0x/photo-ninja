@@ -10,25 +10,4 @@
 .card {
     width: 256px;
     height: 256px;
-    background: url("../../images/card-image.png")  no-repeat;
-}
-
-.sepia {
-    filter: sepia(100%);
-}
-
-.gray {
-    filter: grayscale(100%);
-}
-
-.contrast {
-    filter: contrast(70%);
-}
-
-.brightness {
-    filter: brightness(130%);
-}
-
-.saturation {
-    filter: saturate(150%);
 }

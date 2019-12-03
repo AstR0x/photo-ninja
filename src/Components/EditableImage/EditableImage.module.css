@@ -7,27 +7,3 @@
     width: 30%;
     height: 30%;
 }
-
-.sepia {
-    filter: sepia(100%);
-}
-
-.grayscale {
-    filter: grayscale(100%);
-}
-
-.invert {
-    filter: invert(100%);
-}
-
-.contrast {
-    filter: contrast(70%);
-}
-
-.brightness {
-    filter: brightness(130%);
-}
-
-.saturate {
-    filter: saturate(150%);
-}

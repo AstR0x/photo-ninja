@@ -1,73 +1,80 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
-import Carousel from "react-multi-carousel";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
-import "react-multi-carousel/lib/styles.css";
+import vintagejs from 'vintagejs';
 
-import PhotoCardContainer from "../../containers/PhotoCardContainer";
+import PhotoCardContainer from '../../containers/PhotoCardContainer';
 
 import styles from './PhotoCarousel.module.css';
-import vintagejs from "vintagejs/dist/vintage";
+
+import cardImage from '../../images/card-image.png';
+
 
 const responsive = {
-    desktop: {
-        breakpoint: {max: 3000, min: 1024},
-        items: 3,
-        slidesToSlide: 3,
-    },
-    tablet: {
-        breakpoint: {max: 1024, min: 464},
-        items: 2,
-        slidesToSlide: 2,
-    },
-    mobile: {
-        breakpoint: {max: 464, min: 0},
-        items: 1,
-        slidesToSlide: 1,
-    },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+    slidesToSlide: 3,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+    slidesToSlide: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+    slidesToSlide: 1,
+  },
 };
 
 class PhotoCarousel extends Component {
+  state = {
+    filters: ['original', 'contrast', 'brightness', 'saturation', 'gray', 'sepia', 'vignette', 'lighten'],
+    filtersURLs: {},
+    isLoading: true,
+  };
 
-    state = {
-        filters: ['original', 'contrast', 'brightness', 'saturation', 'gray', 'sepia', 'vignette', 'lighten'],
-        // filtersURLs: {},
-    };
+  async componentDidMount() {
+    const { filters } = this.state;
+    const filtersURLs = {};
 
-    //
-    // async componentDidMount() {
-    //
-    //        const url = await vintagejs('./../../images/card-image.png', {contrast: 0.5});
-    //
-    //
-    //     console.log(url);
-    //
-    //
-    //
-    //     console.log(this.state);
-    // }
+    const promises = filters.map(filter => vintagejs(cardImage, { [filter]: 0.4 }).then(result => {
+      filtersURLs[filter] = result.getDataURL();
+    }));
 
-    render() {
-        const {filters} = this.state;
+    await Promise.all(promises);
 
-        return (
-            <Carousel
-                swipeable={false}
-                draggable={false}
-                showDots={true}
-                responsive={responsive}
-                infinite={true}
-                autoPlaySpeed={1000}
-                keyBoardControl={true}
-                transitionDuration={500}
-                containerClass={styles.carouselContainer}
-                removeArrowOnDeviceType={["tablet", "mobile"]}
-            >
-                {filters.map(filter => <PhotoCardContainer mode={filter}/>)}
-            </Carousel>
-        );
-    }
+    this.setState({ filtersURLs, isLoading: false })
+  }
 
+  render() {
+    const { filtersURLs, filters, isLoading } = this.state;
+
+    return !isLoading ? (
+      <Carousel
+        infinite
+        showDots
+        swipeable={false}
+        draggable={false}
+        responsive={responsive}
+        autoPlaySpeed={1000}
+        transitionDuration={500}
+        containerClass={styles.carouselContainer}
+        removeArrowOnDeviceType={['tablet', 'mobile']}
+      >
+        {filters.map(filter => (
+          <PhotoCardContainer
+            key={filter}
+            URL={filtersURLs[filter]}
+            filter={filter}
+          />
+        ))}
+      </Carousel>
+    ) : null;
+  }
 }
 
 export default PhotoCarousel;

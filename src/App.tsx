@@ -6,14 +6,12 @@ import PhotoCarousel from './components/PhotoCarousel/PhotoCarousel';
 import EditableImageContainer from './containers/EditableImageContainer';
 
 
-const App: React.FC = () => {
-    return (
-        <div className={styles.app}>
-            <Header />
-            <PhotoCarousel />
-            <EditableImageContainer />
-        </div>
-    );
-}
+const App: React.FC = () => (
+  <div className={styles.app}>
+    <Header />
+    <PhotoCarousel />
+    <EditableImageContainer />
+  </div>
+);
 
 export default App;
