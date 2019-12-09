@@ -1,10 +1,8 @@
 .imageContainer {
-    border: 8px #f6f6f6 solid;
+    border: 4px #f6f6f6 solid;
     box-sizing: border-box;
-    margin-left: 70px;
-    margin-bottom: 40px;
-    width: 272px;
-    height: 272px;
+    width: 265px;
+    height: 265px;
 }
 
 .card {

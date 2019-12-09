@@ -10,7 +10,7 @@ class Form extends Component<{ onSubmit: (event: any, url: string) => void }, {}
     inputValue: '',
   };
 
-  handleChangeValue = (event: any) => {
+  handleChangeIntensity = (event: any) => {
     this.setState({
       inputValue: event.target.value,
     });
@@ -25,7 +25,7 @@ class Form extends Component<{ onSubmit: (event: any, url: string) => void }, {}
         <Input
           className={styles.input}
           color="primary"
-          onChange={this.handleChangeValue}
+          onChange={this.handleChangeIntensity}
           value={inputValue}
           placeholder="Ссылка на фотографию"
         />

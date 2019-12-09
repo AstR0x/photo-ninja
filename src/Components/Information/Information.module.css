@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'Yanone Kaffeesatz';
+    src: url('../../fonts/Yanone-Kaffeesatz-Regular.otf');
+}
+
+
+.informationContainer {
+    padding-top: 38px;
+    width: 59%;
+    height: 300px;
+    margin: 0 auto;
+    background-color: #fff;
+}
+
+.heading {
+    text-align: center;
+    font-family: "Yanone Kaffeesatz";
+    font-weight: normal;
+}

@@ -7,10 +7,11 @@ import vintagejs from 'vintagejs';
 
 import PhotoCardContainer from '../../containers/PhotoCardContainer';
 
+import { FILTERS_NAMES, FILTERS_SETTINGS } from '../../constants';
+
 import styles from './PhotoCarousel.module.css';
 
-import cardImage from '../../images/card-image.png';
-
+import cardImage from '../../images/card-image.jpg';
 
 const responsive = {
   desktop: {
@@ -32,26 +33,24 @@ const responsive = {
 
 class PhotoCarousel extends Component {
   state = {
-    filters: ['original', 'contrast', 'brightness', 'saturation', 'gray', 'sepia', 'vignette', 'lighten'],
     filtersURLs: {},
     isLoading: true,
   };
 
   async componentDidMount() {
-    const { filters } = this.state;
     const filtersURLs = {};
 
-    const promises = filters.map(filter => vintagejs(cardImage, { [filter]: 0.4 }).then(result => {
-      filtersURLs[filter] = result.getDataURL();
+    const promises = FILTERS_NAMES.map(filterName => vintagejs(cardImage, FILTERS_SETTINGS[filterName]).then(result => {
+      filtersURLs[filterName] = result.getDataURL();
     }));
 
     await Promise.all(promises);
 
-    this.setState({ filtersURLs, isLoading: false })
+    this.setState({ filtersURLs, isLoading: false });
   }
 
   render() {
-    const { filtersURLs, filters, isLoading } = this.state;
+    const { filtersURLs, isLoading } = this.state;
 
     return !isLoading ? (
       <Carousel
@@ -65,11 +64,11 @@ class PhotoCarousel extends Component {
         containerClass={styles.carouselContainer}
         removeArrowOnDeviceType={['tablet', 'mobile']}
       >
-        {filters.map(filter => (
+        {FILTERS_NAMES.map(filterName => (
           <PhotoCardContainer
-            key={filter}
-            URL={filtersURLs[filter]}
-            filter={filter}
+            key={filterName}
+            URL={filtersURLs[filterName]}
+            filter={filterName}
           />
         ))}
       </Carousel>
