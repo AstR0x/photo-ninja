@@ -13,6 +13,7 @@ const PhotoCard = ({ filter, URL, onSetFilter }: {
       className={styles.imageContainer}
       onClick={() => onSetFilter(filter)}
     >
+      <span className={styles.filterName}>{filter.toUpperCase()}</span>
       <img alt="фото фильтр" src={URL} className={styles.card} />
     </div>
   ) : (

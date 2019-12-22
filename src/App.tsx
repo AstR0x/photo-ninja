@@ -5,6 +5,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Photos from './components/Photos/Photos';
 import Information from './components/Information/Information';
+import FiltersDescription from './components/FiltersDescriptions/FiltersDescription';
 import PhotoCarousel from './components/PhotoCarousel/PhotoCarousel';
 import EditableImageContainer from './containers/EditableImageContainer';
 
@@ -14,6 +15,7 @@ const App: React.FC = () => (
     <Header />
     <Photos />
     <Information />
+    <FiltersDescription />
     <PhotoCarousel />
     <EditableImageContainer />
     <Footer />

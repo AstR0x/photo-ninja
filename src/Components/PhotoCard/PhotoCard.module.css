@@ -5,6 +5,17 @@
     height: 265px;
 }
 
+.filterName {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    color: #000;
+    background-color: #f6f6f6;
+    padding: 2px;
+    position: absolute;
+    bottom: 4px;
+    right: 20px;
+}
+
 .card {
     width: 256px;
     height: 256px;

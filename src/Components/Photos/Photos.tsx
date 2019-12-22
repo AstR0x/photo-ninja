@@ -8,7 +8,7 @@ import styles from './Photos.module.css';
 
 const Photos: React.FC = () => (
   <div className={styles.photosContainer}>
-    {PHOTOS_URLS.map(url => <PhotoCard URL={url} />)}
+    {PHOTOS_URLS.map(url => <PhotoCard key={url} URL={url} />)}
   </div>
 );
 

@@ -1,5 +1,9 @@
 .carouselContainer {
-    width: 67.6%;
-    margin-top: 80px;
+    width: 59%;
     margin-left: 20.5%;
 }
+
+.item {
+    margin-bottom: 20px;
+}
+

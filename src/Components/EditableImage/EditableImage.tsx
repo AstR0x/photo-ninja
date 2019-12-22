@@ -10,7 +10,6 @@ import { FILTERS_SETTINGS, UNCONTROLLED_FILTERS_NAMES, INITIAL_INTENSITY } from 
 
 import styles from './EditableImage.module.css';
 
-
 class EditableImage extends Component<{ filter: string, intensity: number | number[] }, {}> {
   state = {
     originalURL: '',

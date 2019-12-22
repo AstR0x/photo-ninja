@@ -1,0 +1,19 @@
+.descriptionContainer {
+    width: 59%;
+    text-align: center;
+    margin: 80px auto;
+}
+
+.expansionPanel {
+    max-height: 0;
+    margin-top: 20px;
+    visibility: hidden;
+    opacity: 0;
+    transition: max-height 0.8s ease-out, visibility 0.8s linear, opacity 0.5s ease-out;
+}
+
+.animatedExpansionPanel {
+    max-height: 2048px;
+    visibility: visible;
+    opacity: 1;
+}

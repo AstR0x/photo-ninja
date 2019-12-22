@@ -14,7 +14,7 @@
 
 .heading {
     margin-top: 0;
-    font-family: Han-Zi;
+    font-family: Han-Zi, sans-serif;
     text-align: center;
     text-transform: uppercase;
 }

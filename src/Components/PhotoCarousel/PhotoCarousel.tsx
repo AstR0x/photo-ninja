@@ -59,10 +59,11 @@ class PhotoCarousel extends Component {
         swipeable={false}
         draggable={false}
         responsive={responsive}
-        autoPlaySpeed={1000}
         transitionDuration={500}
         containerClass={styles.carouselContainer}
         removeArrowOnDeviceType={['tablet', 'mobile']}
+        itemClass={styles.item}
+        centerMode
       >
         {FILTERS_NAMES.map(filterName => (
           <PhotoCardContainer

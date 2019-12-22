@@ -3,17 +3,24 @@
     src: url('../../fonts/Yanone-Kaffeesatz-Regular.otf');
 }
 
-
 .informationContainer {
     padding-top: 38px;
     width: 59%;
     height: 300px;
     margin: 0 auto;
-    background-color: #fff;
 }
 
 .heading {
     text-align: center;
-    font-family: "Yanone Kaffeesatz";
+    font-size: 28px;
+    font-family: "Yanone Kaffeesatz", sans-serif;
     font-weight: normal;
+}
+
+.information {
+    font-family: Arial, sans-serif;
+    margin-left: 27%;
+    width: 580px;
+    line-height: 26px;
+    font-size: 18px;
 }
