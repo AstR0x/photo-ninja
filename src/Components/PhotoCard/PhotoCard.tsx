@@ -2,23 +2,23 @@ import React from 'react';
 
 import styles from './PhotoCard.module.css';
 
-const PhotoCard = ({ filter, URL, onSetFilter }: {
-  filter?: string,
+const PhotoCard = ({ effect, URL, onSetEffect }: {
+  effect?: string,
   URL: string,
-  onSetFilter?: (filter: string) => void,
+  onSetEffect?: (effect: string) => void,
 }) => {
-  return filter ? (
+  return effect ? (
     <div
       role="button"
       className={styles.imageContainer}
-      onClick={() => onSetFilter(filter)}
+      onClick={() => onSetEffect(effect)}
     >
-      <span className={styles.filterName}>{filter.toUpperCase()}</span>
-      <img alt="фото фильтр" src={URL} className={styles.card} />
+      <span className={styles.effectName}>{effect.toUpperCase()}</span>
+      <img alt="фото эффект" src={URL} className={styles.card} />
     </div>
   ) : (
     <div className={styles.imageContainer}>
-      <img alt="фото фильтр" src={URL} className={styles.card} />
+      <img alt="фото эффект" src={URL} className={styles.card} />
     </div>
   );
 };

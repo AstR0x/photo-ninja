@@ -1,9 +1,14 @@
-import { SET_PHOTO_FILTER, SET_INTENSITY, SetPhotoFilterType, SetIntensityType } from '../actions';
+import {
+  SET_PHOTO_EFFECT,
+  SET_INTENSITY,
+  SetPhotoEffectType,
+  SetIntensityType,
+} from '../actions';
 
-export default (state: any = { filter: 'origin' }, action: SetPhotoFilterType | SetIntensityType) => {
+export default (state: any = { effect: 'origin' }, action: SetPhotoEffectType | SetIntensityType) => {
   switch (action.type) {
-    case SET_PHOTO_FILTER:
-      return { ...state, filter: action.filter };
+    case SET_PHOTO_EFFECT:
+      return { ...state, effect: action.effect };
     case SET_INTENSITY:
       return { ...state, value: action.intensity };
     default:

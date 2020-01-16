@@ -9,8 +9,7 @@ import photo8 from '../images/photo8.png';
 
 export const PHOTOS_URLS = [photo1, photo2, photo3, photo4, photo5, photo6, photo7, photo8];
 
-
-export const FILTERS_NAMES = [
+export const EFFECTS_NAMES: string[] = [
   'original',
   'contrast',
   'brightness',
@@ -25,7 +24,11 @@ export const FILTERS_NAMES = [
   'purple',
 ];
 
-export const FILTERS_DESCRIPTIONS = {
+interface EFFECTS_DESCRIPTIONS_TYPE {
+  [effect: string]: string,
+}
+
+export const EFFECTS_DESCRIPTIONS: EFFECTS_DESCRIPTIONS_TYPE = {
   original: 'Оригинальная фотография без изменений.',
   contrast: 'Эффект делает фотографию более контрастной.',
   brightness: 'Данный эффект повышает яркость фотографии.',
@@ -40,9 +43,9 @@ export const FILTERS_DESCRIPTIONS = {
   purple: 'Эффект фильтр придаёт фотографии фиолетовый оттенок.',
 };
 
-export const UNCONTROLLED_FILTERS_NAMES = ['gray', 'sepia', 'original'];
+export const UNCONTROLLED_EFFECTS_NAMES: string[] = ['gray', 'sepia', 'original'];
 
-export const FILTERS_SETTINGS = {
+export const EFFECTS_SETTINGS = {
   original: {},
   contrast: { contrast: 0.3 },
   brightness: { brightness: 0.3 },
@@ -85,4 +88,4 @@ export const FILTERS_SETTINGS = {
   },
 };
 
-export const INITIAL_INTENSITY = 0.25;
+export const INITIAL_INTENSITY: number = 0.25;

@@ -12,16 +12,17 @@ import {
   ExpansionPanelDetails,
 } from '@material-ui/core';
 
-import { FILTERS_NAMES, FILTERS_DESCRIPTIONS } from '../../constants';
+import { EFFECTS_NAMES, EFFECTS_DESCRIPTIONS } from '../../constants';
 
-import styles from './FiltersDescription.module.css';
+import styles from './EffectsDescription.module.css';
 
-class FiltersDescription extends Component {
+class EffectsDescription extends Component {
   state = {
     isOpen: false,
+    expandedPanel: null,
   };
 
-  handleClick = () => {
+  handleClickButton = () => {
     const { isOpen } = this.state;
 
     this.setState({
@@ -29,15 +30,24 @@ class FiltersDescription extends Component {
     });
   };
 
+  handleClickPanel = (nextExpandedPanel: string) => (): void => {
+    const { expandedPanel } = this.state;
+    const newValue = expandedPanel !== nextExpandedPanel ? nextExpandedPanel : null;
+
+    this.setState({
+      expandedPanel: newValue,
+    });
+  };
+
   render() {
-    const { isOpen } = this.state;
+    const { isOpen, expandedPanel } = this.state;
 
     const classes = clsx(styles.expansionPanel, isOpen && styles.animatedExpansionPanel);
 
     return (
       <div className={styles.descriptionContainer}>
         <Button
-          onClick={this.handleClick}
+          onClick={this.handleClickButton}
           variant="contained"
           color="primary"
           size="small"
@@ -45,15 +55,15 @@ class FiltersDescription extends Component {
           Описание фильтров
         </Button>
         <div className={classes}>
-          {FILTERS_NAMES.map(name => (
-            <ExpansionPanel>
+          {EFFECTS_NAMES.map(name => (
+            <ExpansionPanel onClick={this.handleClickPanel(name)} expanded={isOpen && expandedPanel === name}>
               <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography variant="h6">
                   {name.toUpperCase()}
                 </Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
-                {FILTERS_DESCRIPTIONS[name]}
+                {EFFECTS_DESCRIPTIONS[name]}
               </ExpansionPanelDetails>
             </ExpansionPanel>
           ))}
@@ -63,4 +73,4 @@ class FiltersDescription extends Component {
   }
 }
 
-export default FiltersDescription;
+export default EffectsDescription;

@@ -5,7 +5,7 @@ import styles from './Information.module.css';
 
 const Information: React.FC = () => (
   <Paper className={styles.informationContainer}>
-    <h2 className={styles.heading}>Сайт для наложения фото фильтров</h2>
+    <h2 className={styles.heading}>Сайт для наложения фото эффектов</h2>
     <p className={styles.information}>
       Сайт находится в активной разработке. В дальнейшем будет добавлено большое количество фильтров и дополнительные
       возможности редактирования фотографий.

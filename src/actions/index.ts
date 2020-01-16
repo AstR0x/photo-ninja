@@ -1,9 +1,9 @@
-export const SET_PHOTO_FILTER: 'SET_PHOTO_FILTER' = 'SET_PHOTO_FILTER';
+export const SET_PHOTO_EFFECT: 'SET_PHOTO_EFFECT' = 'SET_PHOTO_EFFECT';
 export const SET_INTENSITY: 'SET_INTENSITY' = 'SET_INTENSITY';
 
-export interface SetPhotoFilterType {
-  type: 'SET_PHOTO_FILTER',
-  filter: string,
+export interface SetPhotoEffectType {
+  type: 'SET_PHOTO_EFFECT',
+  effect: string,
 }
 
 export interface SetIntensityType {
@@ -11,9 +11,9 @@ export interface SetIntensityType {
   intensity: number | number[],
 }
 
-export const setPhotoFilter = (filter: string): SetPhotoFilterType => ({
-  type: SET_PHOTO_FILTER,
-  filter,
+export const setPhotoEffect = (effect: string): SetPhotoEffectType => ({
+  type: SET_PHOTO_EFFECT,
+  effect,
 });
 
 export const setIntensity = (intensity: number | number[]): SetIntensityType => ({

@@ -18,9 +18,10 @@
 }
 
 .information {
-    font-family: Arial, sans-serif;
-    margin-left: 27%;
     width: 580px;
-    line-height: 26px;
+    margin: 0 auto;
+    text-align: center;
     font-size: 18px;
+    font-family: Arial, sans-serif;
+    line-height: 26px;
 }

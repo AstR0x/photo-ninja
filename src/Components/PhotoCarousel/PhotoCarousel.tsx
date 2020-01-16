@@ -7,7 +7,7 @@ import vintagejs from 'vintagejs';
 
 import PhotoCardContainer from '../../containers/PhotoCardContainer';
 
-import { FILTERS_NAMES, FILTERS_SETTINGS } from '../../constants';
+import { EFFECTS_NAMES, EFFECTS_SETTINGS } from '../../constants';
 
 import styles from './PhotoCarousel.module.css';
 
@@ -33,24 +33,24 @@ const responsive = {
 
 class PhotoCarousel extends Component {
   state = {
-    filtersURLs: {},
+    effectsURLs: {},
     isLoading: true,
   };
 
   async componentDidMount() {
-    const filtersURLs = {};
+    const effectsURLs = {};
 
-    const promises = FILTERS_NAMES.map(filterName => vintagejs(cardImage, FILTERS_SETTINGS[filterName]).then(result => {
-      filtersURLs[filterName] = result.getDataURL();
+    const promises = EFFECTS_NAMES.map(effectName => vintagejs(cardImage, EFFECTS_SETTINGS[effectName]).then(result => {
+      effectsURLs[effectName] = result.getDataURL();
     }));
 
     await Promise.all(promises);
 
-    this.setState({ filtersURLs, isLoading: false });
+    this.setState({ effectsURLs, isLoading: false });
   }
 
   render() {
-    const { filtersURLs, isLoading } = this.state;
+    const { effectsURLs, isLoading } = this.state;
 
     return !isLoading ? (
       <Carousel
@@ -65,11 +65,11 @@ class PhotoCarousel extends Component {
         itemClass={styles.item}
         centerMode
       >
-        {FILTERS_NAMES.map(filterName => (
+        {EFFECTS_NAMES.map(effectName => (
           <PhotoCardContainer
-            key={filterName}
-            URL={filtersURLs[filterName]}
-            filter={filterName}
+            key={effectName}
+            URL={effectsURLs[effectName]}
+            effect={effectName}
           />
         ))}
       </Carousel>
