@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import { setPhotoEffect } from '../actions';
 
-import PhotoCard from '../components/PhotoCard/PhotoCard';
+import PhotoCard from '../component/PhotoCard/PhotoCard';
 
 const mapDispatchToProps = (dispatch: any) => ({
   onSetEffect: (effect: string) => dispatch(setPhotoEffect(effect)),
