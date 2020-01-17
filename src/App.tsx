@@ -1,12 +1,12 @@
 import React from 'react';
 
 import styles from './App.module.css';
-import Header from './component/Header/Header';
-import Footer from './component/Footer/Footer';
-import Photos from './component/Photos/Photos';
-import Information from './component/Information/Information';
-import EffectsDescription from './component/EffectsDescriptions/EffectsDescription';
-import PhotoCarousel from './component/PhotoCarousel/PhotoCarousel';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Photos from './components/Photos/Photos';
+import Information from './components/Information/Information';
+import EffectsDescription from './components/EffectsDescriptions/EffectsDescription';
+import PhotoCarousel from './components/PhotoCarousel/PhotoCarousel';
 import EditableImageContainer from './containers/EditableImageContainer';
 
 const App: React.FC = () => (

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import IntensitySlider from '../component/IntensitySlider/IntensitySlider';
+import IntensitySlider from '../components/IntensitySlider/IntensitySlider';
 
 import { setIntensity } from '../actions';
 
