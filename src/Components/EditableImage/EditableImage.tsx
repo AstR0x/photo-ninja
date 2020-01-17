@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
+import Paper from '@material-ui/core/Paper';
 import vintagejs from 'vintagejs';
 
 import IntensitySliderContainer from '../../containers/IntensitySliderContainer';
 
 import Form from '../Form/Form';
+import Loader from '../Loader/Loader';
 
 import { EFFECTS_SETTINGS, UNCONTROLLED_EFFECTS_NAMES, INITIAL_INTENSITY } from '../../constants';
 
@@ -17,8 +19,9 @@ interface Props {
 
 class EditableImage extends Component<{ effect: string, intensity: number | number[] }, {}> {
   state = {
-    originalURL: '',
-    modifiedURL: '',
+    isLoading: false,
+    originalURL: null,
+    modifiedURL: null,
   };
 
   UNSAFE_componentWillReceiveProps({ effect, intensity }: Props) {
@@ -38,21 +41,43 @@ class EditableImage extends Component<{ effect: string, intensity: number | numb
 
   handleSubmit = (event: any, URL: string) => {
     event.preventDefault();
-    this.setState({ originalURL: URL });
+
+    this.setState({
+      isLoading: true,
+    });
+
+    fetch('http://localhost:5000', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        URL,
+        controlledSettings: {},
+      }),
+    }).then(response => response.json())
+      .then(({ code }) => this.setState({ originalURL: code, modifiedURL: null, isLoading: false }));
   };
 
   render() {
-    const { originalURL, modifiedURL } = this.state;
+    const { originalURL, modifiedURL, isLoading } = this.state;
     const { effect } = this.props;
 
-    return modifiedURL || originalURL ? (
+    return modifiedURL || originalURL || isLoading ? (
       <>
         <div className={styles.imageContainer}>
-          <img
-            className={styles.image}
-            alt="Редактируемое изображение"
-            src={modifiedURL || originalURL}
-          />
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <Paper className={styles.imagePaper}>
+              <img
+                className={styles.image}
+                alt="Редактируемое изображение"
+                src={modifiedURL || originalURL}
+              />
+            </Paper>
+          )}
         </div>
         <Form onSubmit={this.handleSubmit} />
         {!UNCONTROLLED_EFFECTS_NAMES.includes(effect) ? <IntensitySliderContainer /> : null}

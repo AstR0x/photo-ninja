@@ -1,6 +1,6 @@
 {
   "name": "photo-ninja",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.7.0",
@@ -10,20 +10,24 @@
     "@types/react": "16.9.12",
     "@types/react-dom": "16.9.4",
     "@types/react-redux": "^7.1.5",
+    "body-parser": "^1.19.0",
     "clsx": "^1.0.4",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-multi-carousel": "^2.4.2",
     "react-redux": "^7.1.3",
-    "react-scripts": "3.2.0",
+    "react-scripts": "^3.3.0",
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
+    "request": "^2.88.0",
     "typescript": "3.7.2",
     "vintagejs": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
+    "server": "node server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
