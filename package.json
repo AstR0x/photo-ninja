@@ -1,59 +1,39 @@
 {
   "name": "photo-ninja",
   "version": "1.0.0",
-  "private": true,
+  "description": "photo effects website",
+  "main": "app.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node app.js",
+    "server": "nodemon app.js",
+    "client": "npm run start --prefix ./client",
+    "client:install": "npm install --prefix ./client",
+    "client:build": "npm run build --prefix ./client",
+    "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AstR0x/photo-ninja.git"
+  },
+  "keywords": [
+    "photo-ninja"
+  ],
+  "author": "Astr0x",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AstR0x/photo-ninja/issues"
+  },
+  "homepage": "https://github.com/AstR0x/photo-ninja#readme",
   "dependencies": {
-    "@material-ui/core": "^4.7.0",
-    "@material-ui/icons": "^4.5.1",
-    "@types/jest": "24.0.23",
-    "@types/node": "12.12.12",
-    "@types/react": "16.9.12",
-    "@types/react-dom": "16.9.4",
-    "@types/react-redux": "^7.1.5",
     "body-parser": "^1.19.0",
-    "clsx": "^1.0.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-multi-carousel": "^2.4.2",
-    "react-redux": "^7.1.3",
-    "react-scripts": "^3.3.0",
-    "redux": "^4.0.4",
-    "redux-devtools-extension": "^2.13.8",
-    "request": "^2.88.0",
-    "typescript": "3.7.2",
-    "vintagejs": "^2.2.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "server": "nodemon server/index.js",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "request": "^2.88.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.7.0",
-    "eslint-config-airbnb-typescript": "^6.3.1",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.15.1",
-    "eslint-plugin-react-hooks": "^1.7.0",
+    "concurrently": "^5.0.2",
+    "config": "^3.2.5",
+    "cross-env": "^6.0.3",
     "nodemon": "^2.0.2"
   }
 }
