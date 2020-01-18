@@ -5,7 +5,7 @@ import {
   SetIntensityType,
 } from '../actions';
 
-export default (state: any = { effect: 'origin' }, action: SetPhotoEffectType | SetIntensityType) => {
+export default (state: any = { effect: 'original' }, action: SetPhotoEffectType | SetIntensityType) => {
   switch (action.type) {
     case SET_PHOTO_EFFECT:
       return { ...state, effect: action.effect };

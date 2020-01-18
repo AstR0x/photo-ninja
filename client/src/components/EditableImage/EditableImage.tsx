@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import Paper from '@material-ui/core/Paper';
 import vintagejs from 'vintagejs';
@@ -14,18 +14,15 @@ import styles from './EditableImage.module.css';
 
 interface Props {
   effect: string,
-  intensity: number,
+  intensity: number | number[],
 }
 
-class EditableImage extends Component<{ effect: string, intensity: number | number[] }, {}> {
-  state = {
-    isLoading: false,
-    originalURL: null,
-    modifiedURL: null,
-  };
+const EditableImage = ({ effect, intensity }: Props) => {
+  const [isLoading, setLoading] = useState(false);
+  const [originalURL, setOriginalURL] = useState(null);
+  const [modifiedURL, setModifiedURL] = useState(null);
 
-  UNSAFE_componentWillReceiveProps({ effect, intensity }: Props) {
-    const { originalURL } = this.state;
+  if (originalURL !== null) {
     const controlledSettings = EFFECTS_SETTINGS[effect];
 
     if (!controlledSettings.screen) {
@@ -36,54 +33,46 @@ class EditableImage extends Component<{ effect: string, intensity: number | numb
 
     vintagejs(originalURL, controlledSettings)
       .then(res => res.getDataURL())
-      .then(modifiedURL => this.setState({ modifiedURL }));
+      .then(url => setModifiedURL(url));
   }
 
-  handleSubmit = (event: any, URL: string) => {
+  const handleSubmit = (event: any, URL: string) => {
     event.preventDefault();
 
-    this.setState({
-      isLoading: true,
-    });
+    setLoading(true);
 
     fetch('http://localhost:5000', {
       method: 'POST',
       mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        URL,
-        controlledSettings: {},
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ URL, controlledSettings: {} }),
     }).then(response => response.json())
-      .then(({ code }) => this.setState({ originalURL: code, modifiedURL: null, isLoading: false }));
+      .then(({ code }) => {
+        setOriginalURL(code);
+        setModifiedURL(null);
+        setLoading(false);
+      });
   };
 
-  render() {
-    const { originalURL, modifiedURL, isLoading } = this.state;
-    const { effect } = this.props;
-
-    return modifiedURL || originalURL || isLoading ? (
-      <>
-        <div className={styles.imageContainer}>
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <Paper className={styles.imagePaper}>
-              <img
-                className={styles.image}
-                alt="Редактируемое изображение"
-                src={modifiedURL || originalURL}
-              />
-            </Paper>
-          )}
-        </div>
-        <Form onSubmit={this.handleSubmit} />
-        {!UNCONTROLLED_EFFECTS_NAMES.includes(effect) ? <IntensitySliderContainer /> : null}
-      </>
-    ) : <Form onSubmit={this.handleSubmit} />;
-  }
-}
+  return modifiedURL || originalURL || isLoading ? (
+    <>
+      <div className={styles.imageContainer}>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <Paper className={styles.imagePaper}>
+            <img
+              className={styles.image}
+              alt="Редактируемое изображение"
+              src={modifiedURL || originalURL}
+            />
+          </Paper>
+        )}
+      </div>
+      <Form onSubmit={handleSubmit} />
+      {!UNCONTROLLED_EFFECTS_NAMES.includes(effect) ? <IntensitySliderContainer /> : null}
+    </>
+  ) : <Form onSubmit={handleSubmit} />;
+};
 
 export default EditableImage;

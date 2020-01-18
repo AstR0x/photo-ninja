@@ -21,20 +21,31 @@
     height: 163px;
 }
 
-@media screen and (min-width: 1281px) {
+@media screen and (min-width: 1281px) and (max-width: 1366px) {
     .imageContainer {
-        width: 190px;
-        height: 190px;
+        width: 185px;
+        height: 185px;
     }
 
     .card {
-        width: 181px;
-        height: 181px;
+        width: 176px;
+        height: 176px;
     }
 }
 
+@media screen and (min-width: 1367px) and (max-width: 1440px) {
+    .imageContainer {
+        width: 194px;
+        height: 194px;
+    }
 
-@media screen and (min-width: 1441px) {
+    .card {
+        width: 185px;
+        height: 185px;
+    }
+}
+
+@media screen and (min-width: 1441px) and (max-width: 1920px) {
     .imageContainer {
         width: 265px;
         height: 265px;

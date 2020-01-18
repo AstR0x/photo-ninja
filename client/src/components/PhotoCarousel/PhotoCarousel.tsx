@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -31,50 +31,48 @@ const responsive = {
   },
 };
 
-class PhotoCarousel extends Component {
-  state = {
-    effectsURLs: {},
-    isLoading: true,
-  };
+const PhotoCarousel = () => {
+  const [effectsURLs, setEffectsURLs] = useState({});
+  const [isLoading, setLoading] = useState(true);
 
-  async componentDidMount() {
-    const effectsURLs = {};
-
+  const setPhotosWithEffects = async () => {
     const promises = EFFECTS_NAMES.map(effectName => vintagejs(cardImage, EFFECTS_SETTINGS[effectName]).then(result => {
       effectsURLs[effectName] = result.getDataURL();
     }));
 
     await Promise.all(promises);
 
-    this.setState({ effectsURLs, isLoading: false });
-  }
+    setEffectsURLs(effectsURLs);
+    setLoading(false);
+  };
 
-  render() {
-    const { effectsURLs, isLoading } = this.state;
+  useEffect(() => {
+    setPhotosWithEffects();
+  }, []);
 
-    return !isLoading ? (
-      <Carousel
-        infinite
-        showDots
-        swipeable={false}
-        draggable={false}
-        responsive={responsive}
-        transitionDuration={500}
-        containerClass={styles.carouselContainer}
-        removeArrowOnDeviceType={['tablet', 'mobile']}
-        itemClass={styles.item}
-        centerMode
-      >
-        {EFFECTS_NAMES.map(effectName => (
-          <PhotoCardContainer
-            key={effectName}
-            URL={effectsURLs[effectName]}
-            effect={effectName}
-          />
-        ))}
-      </Carousel>
-    ) : null;
-  }
-}
+  return !isLoading ? (
+    <Carousel
+      infinite
+      showDots
+      swipeable={false}
+      draggable={false}
+      responsive={responsive}
+      transitionDuration={500}
+      containerClass={styles.carouselContainer}
+      removeArrowOnDeviceType={['tablet', 'mobile']}
+      itemClass={styles.item}
+      centerMode
+    >
+      {EFFECTS_NAMES.map(effectName => (
+        <PhotoCardContainer
+          key={effectName}
+          URL={effectsURLs[effectName]}
+          effect={effectName}
+        />
+      ))}
+    </Carousel>
+  ) : null;
+};
+
 
 export default PhotoCarousel;

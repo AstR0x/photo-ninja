@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import clsx from 'clsx';
 
@@ -16,61 +16,47 @@ import { EFFECTS_NAMES, EFFECTS_DESCRIPTIONS } from '../../constants';
 
 import styles from './EffectsDescription.module.css';
 
-class EffectsDescription extends Component {
-  state = {
-    isOpen: false,
-    expandedPanel: null,
-  };
+const EffectsDescription = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [expandedPanel, setExpandedPanel] = useState(null);
 
-  handleClickButton = () => {
-    const { isOpen } = this.state;
-
-    this.setState({
-      isOpen: !isOpen,
-    });
-  };
-
-  handleClickPanel = (nextExpandedPanel: string) => (): void => {
-    const { expandedPanel } = this.state;
+  const handleClickPanel = (nextExpandedPanel: string) => (): void => {
     const newValue = expandedPanel !== nextExpandedPanel ? nextExpandedPanel : null;
-
-    this.setState({
-      expandedPanel: newValue,
-    });
+    setExpandedPanel(newValue);
   };
 
-  render() {
-    const { isOpen, expandedPanel } = this.state;
+  const handleClickButton = () => {
+    setIsOpen(!isOpen);
+  };
 
-    const classes = clsx(styles.expansionPanel, isOpen && styles.animatedExpansionPanel);
+  const classes = clsx(styles.expansionPanel, isOpen && styles.animatedExpansionPanel);
 
-    return (
-      <div className={styles.descriptionContainer}>
-        <Button
-          onClick={this.handleClickButton}
-          variant="contained"
-          color="primary"
-          size="small"
-        >
-          Описание фильтров
-        </Button>
-        <div className={classes}>
-          {EFFECTS_NAMES.map(name => (
-            <ExpansionPanel onClick={this.handleClickPanel(name)} expanded={isOpen && expandedPanel === name}>
-              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography variant="h6">
-                  {name.toUpperCase()}
-                </Typography>
-              </ExpansionPanelSummary>
-              <ExpansionPanelDetails>
-                {EFFECTS_DESCRIPTIONS[name]}
-              </ExpansionPanelDetails>
-            </ExpansionPanel>
-          ))}
-        </div>
+  return (
+    <div className={styles.descriptionContainer}>
+      <Button
+        onClick={handleClickButton}
+        variant="contained"
+        color="primary"
+        size="small"
+      >
+        Описание фильтров
+      </Button>
+      <div className={classes}>
+        {EFFECTS_NAMES.map(name => (
+          <ExpansionPanel key={name} onClick={handleClickPanel(name)} expanded={isOpen && expandedPanel === name}>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography variant="h6">
+                {name.toUpperCase()}
+              </Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              {EFFECTS_DESCRIPTIONS[name]}
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+        ))}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default EffectsDescription;
