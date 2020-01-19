@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 
+import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import vintagejs from 'vintagejs';
 
 import IntensitySliderContainer from '../../containers/IntensitySliderContainer';
+
 
 import Form from '../Form/Form';
 import Loader from '../Loader/Loader';
@@ -12,17 +14,17 @@ import { EFFECTS_SETTINGS, UNCONTROLLED_EFFECTS_NAMES, INITIAL_INTENSITY } from 
 
 import styles from './EditableImage.module.css';
 
-interface Props {
+interface EditableImageProps {
   effect: string,
   intensity: number | number[],
 }
 
-const EditableImage = ({ effect, intensity }: Props) => {
-  const [isLoading, setLoading] = useState(false);
-  const [originalURL, setOriginalURL] = useState(null);
-  const [modifiedURL, setModifiedURL] = useState(null);
+const EditableImage: React.FC<EditableImageProps> = ({ effect, intensity }: EditableImageProps) => {
+  const [isLoading, setLoading] = useState<boolean>(false);
+  const [originalURL, setOriginalURL] = useState<string>('');
+  const [modifiedURL, setModifiedURL] = useState<string>('');
 
-  if (originalURL !== null) {
+  if (originalURL) {
     const controlledSettings = EFFECTS_SETTINGS[effect];
 
     if (!controlledSettings.screen) {
@@ -36,7 +38,7 @@ const EditableImage = ({ effect, intensity }: Props) => {
       .then(url => setModifiedURL(url));
   }
 
-  const handleSubmit = (event: any, URL: string) => {
+  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>, URL: string) => {
     event.preventDefault();
 
     setLoading(true);
@@ -49,7 +51,7 @@ const EditableImage = ({ effect, intensity }: Props) => {
     }).then(response => response.json())
       .then(({ code }) => {
         setOriginalURL(code);
-        setModifiedURL(null);
+        setModifiedURL('');
         setLoading(false);
       });
   };
@@ -66,6 +68,21 @@ const EditableImage = ({ effect, intensity }: Props) => {
               alt="Редактируемое изображение"
               src={modifiedURL || originalURL}
             />
+            <div className={styles.downloadLinkContainer}>
+              <Button
+                variant="contained"
+                color="primary"
+                size="small"
+              >
+                <a
+                  className={styles.downloadLink}
+                  href={modifiedURL || originalURL}
+                  download="image.jpg"
+                >
+                  Сохранить изображение
+                </a>
+              </Button>
+            </div>
           </Paper>
         )}
       </div>

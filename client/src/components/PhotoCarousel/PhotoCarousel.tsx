@@ -31,9 +31,9 @@ const responsive = {
   },
 };
 
-const PhotoCarousel = () => {
-  const [effectsURLs, setEffectsURLs] = useState({});
-  const [isLoading, setLoading] = useState(true);
+const PhotoCarousel: React.FC = () => {
+  const [effectsURLs, setEffectsURLs] = useState<object>({});
+  const [isLoading, setLoading] = useState<boolean>(true);
 
   const setPhotosWithEffects = async () => {
     const promises = EFFECTS_NAMES.map(effectName => vintagejs(cardImage, EFFECTS_SETTINGS[effectName]).then(result => {

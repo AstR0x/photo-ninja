@@ -12,12 +12,12 @@ const StylesSlider = withStyles({
   },
 })(Slider);
 
-interface IntensitySliderType {
+interface IntensitySliderProps{
   onSetIntensity?: (event: any, intensity: number | number[]) => void,
   intensity: any,
 }
 
-const IntensitySlider = ({ intensity, onSetIntensity }: IntensitySliderType) => (
+const IntensitySlider: React.FC<IntensitySliderProps> = ({ intensity, onSetIntensity }: IntensitySliderProps) => (
   <div className={styles.sliderContainer}>
     <Typography id="slider-label" color="primary" gutterBottom>
       Интенсивность

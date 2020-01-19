@@ -5,11 +5,11 @@ import Button from '@material-ui/core/Button';
 
 import styles from './Form.module.css';
 
-interface Props {
-  onSubmit: (event: any, url: string) => void,
+interface FormProps {
+  onSubmit: (event: React.MouseEvent<HTMLButtonElement>, url: string) => void,
 }
 
-const Form = ({ onSubmit }: Props) => {
+const Form: React.FC<FormProps> = ({ onSubmit }: FormProps) => {
   const [inputValue, setInputValue] = useState('');
 
   const handleChangeIntensity = (event: any) => {

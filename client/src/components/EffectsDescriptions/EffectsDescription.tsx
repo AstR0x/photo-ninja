@@ -16,12 +16,12 @@ import { EFFECTS_NAMES, EFFECTS_DESCRIPTIONS } from '../../constants';
 
 import styles from './EffectsDescription.module.css';
 
-const EffectsDescription = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [expandedPanel, setExpandedPanel] = useState(null);
+const EffectsDescription: React.FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [expandedPanel, setExpandedPanel] = useState<string>('');
 
   const handleClickPanel = (nextExpandedPanel: string) => (): void => {
-    const newValue = expandedPanel !== nextExpandedPanel ? nextExpandedPanel : null;
+    const newValue = expandedPanel !== nextExpandedPanel ? nextExpandedPanel : '';
     setExpandedPanel(newValue);
   };
 

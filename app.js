@@ -21,9 +21,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.post('/', (req, res) => {
-  utils.download(req.body.URL, 'editableImage.jpg', () => {
-    const code = `data:image/jpeg;base64,${utils.base64Encode('./editableImage.jpg')}`;
-    fs.unlink('editableImage.jpg', (err) => {
+  utils.download(req.body.URL, './image.jpg', () => {
+    const code = `data:image/jpg;base64,${utils.base64Encode('./image.jpg')}`;
+    fs.unlink('./image.jpg', (err) => {
       if (err) {
         throw err;
       }

@@ -15,3 +15,12 @@
     margin: 0 auto;
     width: 58%
 }
+
+.downloadLinkContainer {
+    margin-top: 15px;
+}
+
+.downloadLink {
+    color: #fff;
+    text-decoration: none;
+}
