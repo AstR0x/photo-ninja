@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Snackbar from '@material-ui/core/Snackbar';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
+import MuiAlert from '@material-ui/lab/Alert';
+
 import vintagejs from 'vintagejs';
 
 import IntensitySliderContainer from '../../containers/IntensitySliderContainer';
 
-
 import Form from '../Form/Form';
-import Loader from '../Loader/Loader';
 
 import { EFFECTS_SETTINGS, UNCONTROLLED_EFFECTS_NAMES, INITIAL_INTENSITY } from '../../constants';
 
@@ -19,8 +21,11 @@ interface EditableImageProps {
   intensity: number | number[],
 }
 
+const Alert = props => <MuiAlert elevation={6} variant="filled" {...props} />;
+
 const EditableImage: React.FC<EditableImageProps> = ({ effect, intensity }: EditableImageProps) => {
   const [isLoading, setLoading] = useState<boolean>(false);
+  const [isWrong, setWrong] = useState<boolean>(false);
   const [originalURL, setOriginalURL] = useState<string>('');
   const [modifiedURL, setModifiedURL] = useState<string>('');
 
@@ -38,10 +43,15 @@ const EditableImage: React.FC<EditableImageProps> = ({ effect, intensity }: Edit
       .then(url => setModifiedURL(url));
   }
 
+  const setWrongWithDelay = () => setTimeout(() => setWrong(true), 500);
+
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>, URL: string) => {
     event.preventDefault();
-
+    setModifiedURL('');
+    setOriginalURL('');
     setLoading(true);
+    setWrong(false);
+
 
     fetch('http://localhost:5000', {
       method: 'POST',
@@ -53,14 +63,20 @@ const EditableImage: React.FC<EditableImageProps> = ({ effect, intensity }: Edit
         setOriginalURL(code);
         setModifiedURL('');
         setLoading(false);
-      });
+      })
+      .catch(setWrongWithDelay);
   };
 
-  return modifiedURL || originalURL || isLoading ? (
+  const handleClose = () => {
+    setWrong(false);
+    setLoading(false);
+  };
+
+  return (modifiedURL || originalURL || isLoading) && !isWrong ? (
     <>
       <div className={styles.imageContainer}>
         {isLoading ? (
-          <Loader />
+          <CircularProgress className={styles.loader} color="secondary" />
         ) : (
           <Paper className={styles.imagePaper}>
             <img
@@ -68,6 +84,7 @@ const EditableImage: React.FC<EditableImageProps> = ({ effect, intensity }: Edit
               alt="Редактируемое изображение"
               src={modifiedURL || originalURL}
             />
+            {!UNCONTROLLED_EFFECTS_NAMES.includes(effect) ? <IntensitySliderContainer /> : null}
             <div className={styles.downloadLinkContainer}>
               <Button
                 variant="contained"
@@ -87,9 +104,15 @@ const EditableImage: React.FC<EditableImageProps> = ({ effect, intensity }: Edit
         )}
       </div>
       <Form onSubmit={handleSubmit} />
-      {!UNCONTROLLED_EFFECTS_NAMES.includes(effect) ? <IntensitySliderContainer /> : null}
     </>
-  ) : <Form onSubmit={handleSubmit} />;
+  ) : (
+    <>
+      <Form onSubmit={handleSubmit} />
+      <Snackbar open={isWrong} autoHideDuration={3000} onClose={handleClose}>
+        <Alert variant="filled" severity="error">Неправильный URL. Попробуйте снова.</Alert>
+      </Snackbar>
+    </>
+  );
 };
 
 export default EditableImage;

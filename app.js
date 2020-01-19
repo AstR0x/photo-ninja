@@ -25,6 +25,7 @@ app.post('/', (req, res) => {
     const code = `data:image/jpg;base64,${utils.base64Encode('./image.jpg')}`;
     fs.unlink('./image.jpg', (err) => {
       if (err) {
+        res.status(500).json({message: 'Неверный URL!'});
         throw err;
       }
     });
