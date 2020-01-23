@@ -4,8 +4,6 @@
     background-size: 100% 150%;
 }
 
-
-
 @media (min-width: 320px) and (max-width: 374px) {
     .app {
         background: url("./images/background.jpg") -450px -400px no-repeat fixed;
@@ -13,16 +11,9 @@
     }
 }
 
-@media (min-width: 375px) and (max-width: 413px) {
+@media (min-width: 375px) and (max-width: 540px) {
     .app {
         background: url("./images/background.jpg") -700px -500px no-repeat fixed;
-        background-size: 350% 174%;
-    }
-}
-
-@media (min-width: 414px) and (max-width: 540px) {
-    .app {
-        background: url("./images/background.jpg") -700px -500px no-repeat fixed;
-        background-size: 350% 174%;
+        background-size: 350% 178%;
     }
 }
