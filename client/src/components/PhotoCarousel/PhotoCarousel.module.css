@@ -7,3 +7,9 @@
     margin-bottom: 20px;
 }
 
+@media (min-width: 320px) and (max-width: 540px) {
+    .carouselContainer {
+        width: 50%;
+        margin-left: 28%;
+    }
+}

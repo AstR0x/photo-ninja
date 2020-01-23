@@ -53,7 +53,7 @@ const EditableImage: React.FC<EditableImageProps> = ({ effect, intensity }: Edit
     setWrong(false);
 
 
-    fetch('http://localhost', {
+    fetch('http://localhost:5000', {
       method: 'POST',
       mode: 'cors',
       headers: { 'Content-Type': 'application/json' },
@@ -62,6 +62,7 @@ const EditableImage: React.FC<EditableImageProps> = ({ effect, intensity }: Edit
       .then(({ code }) => {
         setOriginalURL(code);
         setModifiedURL('');
+        setLoading(false);
         setLoading(false);
       })
       .catch(setWrongWithDelay);

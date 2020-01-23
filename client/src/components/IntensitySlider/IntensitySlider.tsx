@@ -6,12 +6,6 @@ import Typography from '@material-ui/core/Typography';
 
 import styles from './IntensitySlider.module.css';
 
-const StylesSlider = withStyles({
-  root: {
-    width: 300,
-  },
-})(Slider);
-
 interface IntensitySliderProps{
   onSetIntensity?: (event: any, intensity: number | number[]) => void,
   intensity: any,
@@ -22,7 +16,7 @@ const IntensitySlider: React.FC<IntensitySliderProps> = ({ intensity, onSetInten
     <Typography id="slider-label" color="primary" gutterBottom>
       Интенсивность
     </Typography>
-    <StylesSlider
+    <Slider
       aria-label="slider-label"
       defaultValue={0.25}
       step={0.01}

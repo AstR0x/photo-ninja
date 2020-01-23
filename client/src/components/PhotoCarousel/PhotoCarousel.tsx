@@ -19,17 +19,14 @@ const responsive = {
     items: 3,
     slidesToSlide: 3,
   },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2,
-    slidesToSlide: 2,
-  },
   mobile: {
-    breakpoint: { max: 464, min: 0 },
+    breakpoint: { max: 1080, min: 0 },
     items: 1,
     slidesToSlide: 1,
   },
 };
+
+const isMobile = window.screen.width <= 1080;
 
 const PhotoCarousel: React.FC = () => {
   const [effectsURLs, setEffectsURLs] = useState<object>({});
@@ -53,15 +50,16 @@ const PhotoCarousel: React.FC = () => {
   return !isLoading ? (
     <Carousel
       infinite
-      showDots
-      swipeable={false}
-      draggable={false}
+      swipeable
+      arrows={!isMobile}
+      showDots={!isMobile}
+      autoPlay={isMobile}
+      autoPlaySpeed={3000}
       responsive={responsive}
       transitionDuration={500}
       containerClass={styles.carouselContainer}
-      removeArrowOnDeviceType={['tablet', 'mobile']}
       itemClass={styles.item}
-      centerMode
+      centerMode={!isMobile}
     >
       {EFFECTS_NAMES.map(effectName => (
         <PhotoCardContainer

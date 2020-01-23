@@ -21,6 +21,66 @@
     height: 163px;
 }
 
+@media (min-width: 320px) and (max-width: 359px) {
+    .imageContainer {
+        width: 142px;
+        height: 142px;
+    }
+
+    .card {
+        width: 133px;
+        height: 133px;
+    }
+}
+
+@media (min-width: 360px) and (max-width: 374px) {
+    .imageContainer {
+        width: 162px;
+        height: 162px;
+    }
+
+    .card {
+        width: 153px;
+        height: 153px;
+    }
+}
+
+@media (min-width: 375px) and (max-width: 413px) {
+    .imageContainer {
+        width: 167px;
+        height: 167px;
+    }
+
+    .card {
+        width: 158px;
+        height: 158px;
+    }
+}
+
+@media (min-width: 414px) and (max-width: 539px) {
+    .imageContainer {
+        width: 188px;
+        height: 188px;
+    }
+
+    .card {
+        width: 179px;
+        height: 179px;
+    }
+}
+
+@media (min-width: 540px) {
+    .imageContainer {
+        width: 248px;
+        height: 248px;
+    }
+
+    .card {
+        width: 239px;
+        height: 239px;
+    }
+}
+
 @media screen and (min-width: 1281px) and (max-width: 1366px) {
     .imageContainer {
         width: 185px;

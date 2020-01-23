@@ -17,3 +17,9 @@
     visibility: visible;
     opacity: 1;
 }
+
+@media (min-width: 320px) and (max-width: 540px) {
+    .descriptionContainer {
+        width: 95%;
+    }
+}
